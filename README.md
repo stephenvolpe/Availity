@@ -43,7 +43,7 @@ Map<String, PriorityQueue<Enrollees>>
 The key for this is the company name.  
       Requirement: separate enrollees by insurance company in its own file (companyName will be fileName)
 
-The comparator for the PriorityQueue is lastName and firstName this is in the Enrollees class Requirement
+The comparator for the PriorityQueue is lastName and firstName this is in the Enrollees class
       Requirement: Additionally, sort the contents of each file by last and first name (ascending) (I think ascending == lexigraphical order - could be wrong)
 
 Lastly - when adding to the priortyQueue - we check if we contain the enrollee - if we do, then we check the version and keep the higher one
