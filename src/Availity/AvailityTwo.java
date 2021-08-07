@@ -15,7 +15,6 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class AvailityTwo {
-    //Key is Company:UserId
     Map<Pair<String, String>, Enrollees> records = new TreeMap<>();
     public static void main (String [] args) {
 
@@ -27,14 +26,12 @@ public class AvailityTwo {
     }
 
     public static void readAfileAndSortByLastAndFirstNameAscendingAndRemoveDuplicateUserIDsForTheSameInsuranceCompany (String input) {
-        Map<Pair<String, String>, Enrollees> CompanyAndUserIdTOEnrollees = new HashMap<>();
-        Map<String, PriorityQueue<Enrollees>> companyToEnrollees = new HashMap<>();
+        Map<String, PriorityQueue<Enrollees>> companyToEnrollees = new TreeMap<>((Comparator<String>) (s1, s2) -> s1.compareTo(s2));
 
         int lengthOfEnrollee = 5;
             Scanner scanner = new Scanner(input);
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                System.out.println(line);
                 //There are libraries to read this with java, i'd prefer to use Guava Splitter as I think it's cleaner but I am trying to stay with STD lib as I think that's what the question is asking for...
                 String [] tokens = line.trim().split(",");
                 if (tokens.length != lengthOfEnrollee) {
@@ -76,26 +73,13 @@ public class AvailityTwo {
                     } else {
                         pQueue.add(enrollee);
                     }
-                    //PriorityQueue<Enrollees> thisPQ = companyToEnrollees.get(enrollee.getInsuranceCompany());
-                    //thisPQ.add(enrollee);
-                    //companyToEnrollees.put(enrollee.getInsuranceCompany(), thisPQ);
                 } else { // Need to stand up the pQueue
-                    PriorityQueue<Enrollees> pQueue = new PriorityQueue<Enrollees>(new Comparator<Enrollees>() {
-                        @Override
-                        public int compare(Enrollees e1, Enrollees e2) {
-                            return Enrollees.compareLastAndFirstName(e1,e2);
-                        }
-                    });
+                    PriorityQueue<Enrollees> pQueue = new PriorityQueue<Enrollees>((Comparator<Enrollees>) (e1, e2) -> Enrollees.compareLastAndFirstName(e1,e2));
                     companyToEnrollees.put(enrollee.getInsuranceCompany(), pQueue);
                     pQueue.add(enrollee);
                 }
             }
             scanner.close();
-
-            System.out.println();
-            System.out.println();
-            System.out.println();
-
             for (Map.Entry<String, PriorityQueue<Enrollees>> kvp : companyToEnrollees.entrySet()) {
                 for (Enrollees e : kvp.getValue()) {
                     System.out.println(e.formatForFile());

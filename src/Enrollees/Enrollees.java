@@ -3,11 +3,6 @@ package Enrollees;
 import java.util.Objects;
 
 public class Enrollees {
-    //User Id (string)
-    //First Name (string)
-    //Last Name (string)
-    //Version (integer)
-    //Insurance Company (string)
     private String userID;
     private String firstName;
     private String lastName;
@@ -70,10 +65,6 @@ public class Enrollees {
     public String formatForFile () {
         return lastName + ',' + firstName + ',' + insuranceCompany + ',' + userID + ',' + version;
     }
-
-    //read the content of the file and separate enrollees by insurance company in its own file.
-    //Additionally, sort the contents of each file by last and first name (ascending)
-    //Lastly, if there are duplicate User Ids for the same Insurance Company, then only the record with the highest version should be included.
 
     public String getUserID() {
         return userID;
