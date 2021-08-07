@@ -1,5 +1,5 @@
 # Availity
-Availity
+
 
 1. My proudest professional achievement has been taking ownership of multiple features. Reflecting on features I've "taken ownership" of shows me how far I have come since starting my career.
 
