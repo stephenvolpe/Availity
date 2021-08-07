@@ -1,6 +1,5 @@
 # Availity
 
-
 1. My proudest professional achievement has been taking ownership of multiple features. Reflecting on features I've "taken ownership" of shows me how far I have come since starting my career.
 
 I was able to take ownership to implement a feature a client wanted regarding a tilt tray (A large conveyor that has trays on the conveyor that tilt to both sides.  The way the software worked was that in order to induct (place a stock keeping unit (SKU) onto the tilt tray - was to have a container that owned that sku.  If the SKU ever became orphaned(containerless) ,then it would require user interaction to be able to "reinduct" (find a container in the system, locate it physically, and then induct it -- VERY TIME CONSUMING)
