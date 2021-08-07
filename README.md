@@ -52,18 +52,23 @@ Lastly - when adding to the priortyQueue - we check if we contain the enrollee -
 
 
 Thoughts:
+
 Wow this was so ambiguous I am imagining it was designed that way on purpose! It's done in a single pass so I think that's good.  (Code could probably be cleaned up and abstracted but I think this meets the criteria (if it isn't enough I'll be punching myself in the future...)
+
 
 Biggest gripe I have is using a priorityQueue and then if the userId and Company is contaiend in there (equals of enrollee), then I need to traverse it and find the two enrollees. If the incoming enrollee has a higher version, then I remove the one in the queue and add the new one.
 
+
 Time complexity - we traverse the list once so it's linear, WORST case scenario is everything is the same company, for the same User ID.
 Then I think it's n^2 because im having to traverse the priorityQueue to do the swap on the Version.
+
 
 Space complexity is linear with some constant for the size of a hashmap and priority queue.  Worse case would probably be unique Companies to increase the size of the hashMap holding the priorityQueues but I'm getting tired.
 
 
 Closing thoughts: 
 I enjoyed this and hope to hear from the team.
+
 
 Thanks!
 
