@@ -88,9 +88,6 @@ public class AvailityTwo {
 
 
     public static void readAfileAndSortByLastAndFirstNameAscendingAndRemoveDuplicateUserIDsForTheSameInsuranceCompany (File file) {
-        System.out.println();
-        System.out.println();
-        System.out.println();
         Map<String, PriorityQueue<Enrollees>> companyToEnrollees = new TreeMap<>((Comparator<String>) (s1, s2) -> s1.compareTo(s2));
         Scanner scanner;
         try {
@@ -118,11 +115,10 @@ public class AvailityTwo {
             }
 
 
-            //Lastly, if there are duplicate User Ids for the same Insurance Company, then only the record with the highest version should be included. (Doesn't talk about ties?)
             Enrollees enrollee = new Enrollees(tokens[0], tokens[1], tokens[2], version, tokens[4]);  //read the content of the file and separate enrollees by insurance company in its own file.
 
 
-
+            //separate enrollees by insurance company in its own file (The key is the Company name, which will be used for the fileName, and then all of the things in the PriorityQueue are in the sorted order we want so just print it linearly (no sorting)
             //Additionally, sort the contents of each file by last and first name (ascending) //PriorityQueue with the key of Company
             if (companyToEnrollees.containsKey(enrollee.getInsuranceCompany())) {
                 PriorityQueue<Enrollees> pQueue = companyToEnrollees.get(enrollee.getInsuranceCompany());
@@ -133,7 +129,8 @@ public class AvailityTwo {
                             continue;
                         }
 
-                        //if the incoming enrollee version is higher, then it replaces the other one.
+                        //if the incoming enrollee version is higher, then it replaces the other one. Lastly, if there are duplicate User Ids for the same Insurance
+                        // Company, then only the record with the highest version should be included. (Doesn't talk about ties?) (Since first and last name don't have to be the same)
                         if (enrollee.getVersion() > enr.getVersion()) {
                             pQueue.remove(enr);
                             pQueue.add(enrollee);
@@ -144,20 +141,13 @@ public class AvailityTwo {
                 } else {
                     pQueue.add(enrollee);
                 }
-            } else { // Need to stand up the pQueue
+            } else { // Need to stand up the pQueue as this is the first element in the pQueue
                 PriorityQueue<Enrollees> pQueue = new PriorityQueue<Enrollees>((Comparator<Enrollees>) (e1, e2) -> Enrollees.compareLastAndFirstName(e1,e2));
                 companyToEnrollees.put(enrollee.getInsuranceCompany(), pQueue);
                 pQueue.add(enrollee);
             }
         }
         scanner.close(); //Honestly can't remember if this should be in a finally as the try catch is very specific in the code (I didnt want this entire code block in a try/catch
-
-        for (Map.Entry<String, PriorityQueue<Enrollees>> kvp : companyToEnrollees.entrySet()) {
-            for (Enrollees e : kvp.getValue()) {
-                System.out.println(e.formatForFile());
-            }
-        }
-
 
         for (Map.Entry<String, PriorityQueue<Enrollees>> kvp : companyToEnrollees.entrySet()) {
             String newPath = oututPath + kvp.getKey() + ".txt";

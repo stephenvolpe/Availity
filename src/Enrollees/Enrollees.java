@@ -41,8 +41,6 @@ public class Enrollees {
         Enrollees enrollees = (Enrollees) o;
         return
                 Objects.equals(getUserID(), enrollees.getUserID()) &&
-                        Objects.equals(getFirstName(), enrollees.getFirstName()) &&
-                        Objects.equals(getLastName(), enrollees.getLastName()) &&
                         Objects.equals(getInsuranceCompany(), enrollees.getInsuranceCompany());
     }
 
